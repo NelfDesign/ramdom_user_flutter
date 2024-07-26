@@ -1,7 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:randomuserflutter/features/random_users/presentation/cubit/random_user_cubit.dart';
+import 'package:randomuserflutter/injection.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Initialize Dependency Injection
+  await init();
+
+  final MultiBlocProvider multiBlocProviders = MultiBlocProvider(
+    providers: <BlocProvider<dynamic>>[
+      BlocProvider<RandomUserCubit>(
+        create: (BuildContext context) => RandomUserCubit(getAll: sl()),
+      ),
+    ],
+    child: Builder(
+      builder: (BuildContext context) {
+        return const MyApp();
+      },
+    ),
+  );
+
+  runApp(multiBlocProviders);
 }
 
 class MyApp extends StatelessWidget {
@@ -33,7 +53,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => BlocProvider.of<RandomUserCubit>(context).getAllUsers(),
+    );
+    super.initState();
+  }
+
+  void _incrementCounter() async {
     setState(() {
       _counter++;
     });

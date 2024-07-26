@@ -21,8 +21,8 @@ class Location {
   final String? state;
   @JsonKey(name: 'country', defaultValue: '')
   final String? country;
-  @JsonKey(name: 'postcode', defaultValue: '')
-  final String? postcode;
+  @JsonKey(name: 'postcode', defaultValue: 0)
+  final int? postcode;
 
   factory Location.fromJson(Map<String, dynamic> json) => _$LocationFromJson(json);
 

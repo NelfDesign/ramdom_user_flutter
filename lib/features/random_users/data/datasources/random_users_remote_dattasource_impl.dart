@@ -7,7 +7,6 @@ class RandomUsersRemoteDataSourceImpl implements RandomUserRemoteDataSource {
   @override
   Future<ApiResults> getAllUsers() async {
     final Response decodedJson = await HttpApiClient(dioClient: Dio()).get();
-
     return ApiResults.fromJson(decodedJson.data);
   }
 }

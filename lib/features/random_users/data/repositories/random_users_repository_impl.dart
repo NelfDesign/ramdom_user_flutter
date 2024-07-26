@@ -19,7 +19,7 @@ class RandomUsersRepositoryImpl extends RandomUsersRepository {
 
       return ApiResultsEntity.fromModel(remoteUsers);
     } catch (e) {
-      debugPrint('e');
+      debugPrint('error in repo');
       return null;
     }
   }

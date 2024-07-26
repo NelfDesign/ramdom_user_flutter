@@ -22,5 +22,5 @@ class LocationEntity {
   final String? city;
   final String? state;
   final String? country;
-  final String? postcode;
+  final int? postcode;
 }
