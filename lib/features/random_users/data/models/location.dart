@@ -21,10 +21,20 @@ class Location {
   final String? state;
   @JsonKey(name: 'country', defaultValue: '')
   final String? country;
-  @JsonKey(name: 'postcode', defaultValue: 0)
-  final int? postcode;
+  @JsonKey(name: 'postcode', defaultValue: '', fromJson: dynamicToInt)
+  final dynamic postcode;
 
   factory Location.fromJson(Map<String, dynamic> json) => _$LocationFromJson(json);
 
   Map<String, dynamic> toJson() => _$LocationToJson(this);
+
+  static int dynamicToInt(dynamic json) {
+    if (json is String) {
+      return 0;
+    } else if (json is num) {
+      return json.toInt();
+    } else {
+      return 0;
+    }
+  }
 }

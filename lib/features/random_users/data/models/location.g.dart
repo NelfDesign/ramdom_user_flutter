@@ -13,7 +13,9 @@ Location _$LocationFromJson(Map<String, dynamic> json) => Location(
       city: json['city'] as String? ?? '',
       state: json['state'] as String? ?? '',
       country: json['country'] as String? ?? '',
-      postcode: (json['postcode'] as num?)?.toInt() ?? 0,
+      postcode: json['postcode'] == null
+          ? ''
+          : Location.dynamicToInt(json['postcode']),
     );
 
 Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{

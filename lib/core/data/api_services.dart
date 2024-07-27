@@ -13,7 +13,7 @@ class HttpApiClient {
   }
 
   final Dio _dioClient;
-  final String urlPath = "https://randomuser.me/api/";
+  final String urlPath = "https://randomuser.me/api/?results=20";
 
   void _initDioClient() {
     final options = BaseOptions(
